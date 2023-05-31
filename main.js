@@ -92,7 +92,7 @@ function changeVelocity(){
 var red = Math.random() * 255;
 var blue = Math.random() * 255;
 var green = Math.random() * 255; 
-c.fillStyle = `rgba(${red},${blue},${green},0.5)`;
+c.fillStyle = `rgba(255,255,255,0.5)`;
 c.fill();
 
 
@@ -146,7 +146,7 @@ class Ball {
             this.radius += 1;
         }
     }
-    else if (this.radius > 10){
+    else if (this.radius > 35){
         this.radius -=1;
     }
     }
