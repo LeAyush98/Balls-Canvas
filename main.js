@@ -54,6 +54,10 @@ window.addEventListener('touchmove', function(event){
 
 })
 
+document.body.addEventListener("touchstart", function(e){ if (e.target.nodeName == 'CANVAS') { e.preventDefault(); } }, false);
+document.body.addEventListener("touchend", function(e){ if (e.target.nodeName == 'CANVAS') { e.preventDefault(); } }, false);
+document.body.addEventListener("touchmove", function(e){ if (e.target.nodeName == 'CANVAS') { e.preventDefault(); } }, false);
+
 function changeColor(){
     red = Math.random() * 255;
     blue = Math.random() * 255;
