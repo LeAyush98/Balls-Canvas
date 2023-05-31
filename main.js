@@ -132,10 +132,10 @@ class Ball {
     }
 
     move(){
-        if (this.x_cor+radius > canvas.width || this.x_cor-radius < 0){
+        if (this.x_cor+this.radius > canvas.width || this.x_cor-this.radius < 0){
         this.dx = -this.dx;
     }
-    if (this.y_cor+radius > canvas.height || this.y_cor-radius < 0){
+    if (this.y_cor+this.radius > canvas.height || this.y_cor-this.radius < 0){
         this.dy = -this.dy;
     }
     this.x_cor +=this.dx;
