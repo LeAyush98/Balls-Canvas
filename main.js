@@ -42,6 +42,13 @@ var mouse = {
     y : undefined
 }
 
+var colorArray = [
+    "#080202",
+    "#ECF8F9",
+    "#068DA9",
+    "#7E1717",
+    "#E55807"
+]
 
 window.addEventListener('mousemove', function(event){
     mouse.x = event.x;
@@ -54,9 +61,10 @@ window.addEventListener('touchmove', function(event){
 
 })
 
-document.body.addEventListener("touchstart", function(e){ if (e.target.nodeName == 'CANVAS') { e.preventDefault(); } }, false);
-document.body.addEventListener("touchend", function(e){ if (e.target.nodeName == 'CANVAS') { e.preventDefault(); } }, false);
-document.body.addEventListener("touchmove", function(e){ if (e.target.nodeName == 'CANVAS') { e.preventDefault(); } }, false);
+window.addEventListener('resize', function(event){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+})
 
 function changeColor(){
     red = Math.random() * 255;
@@ -89,11 +97,11 @@ function changeVelocity(){
     
 }
 
-var red = Math.random() * 255;
-var blue = Math.random() * 255;
-var green = Math.random() * 255; 
-c.fillStyle = `rgba(255,255,255,0.5)`;
-c.fill();
+// var red = Math.random() * 255;
+// var blue = Math.random() * 255;
+// var green = Math.random() * 255; 
+// c.fillStyle = `rgba(255,255,255,0.5)`;
+// c.fill();
 
 
 function animate(){
@@ -101,7 +109,6 @@ function animate(){
     c.clearRect(0, 0, canvas.width, canvas.height);
     for(var i = 0; i < ballArray.length; i++ ){
         c.beginPath();
-        ballArray[i].display();
         ballArray[i].move();
     }
     
@@ -116,10 +123,13 @@ class Ball {
         this.dx = dx;
         this.dy = dy;
         this.radius = radius
+        this.minRadius = radius
+        this.color = colorArray[Math.floor(Math.random()*colorArray.length)];
     }
 
     display(){      
         c.arc(this.x_cor,this.y_cor, this.radius, 0, Math.PI*2, false);
+        c.fillStyle = this.color;
         c.fill();  
     }
 
@@ -146,9 +156,10 @@ class Ball {
             this.radius += 1;
         }
     }
-    else if (this.radius > 35){
+    else if (this.radius > this.minRadius){
         this.radius -=1;
     }
+    this.display();
     }
 }
 
@@ -156,8 +167,8 @@ class Ball {
 
 var ballArray = [];
 
-for(var i = 0; i < 100; i++){
-    var radius = 100;
+for(var i = 0; i < 800; i++){
+    var radius = (Math.random()*8) + 1;
     var x_cor = Math.random() * (canvas.width-(radius*2)) + radius;
     var dx = Math.random() * 3;
     var y_cor = Math.random() * (canvas.height-(radius*2)) + radius;
